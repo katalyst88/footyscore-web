@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Footy Scores for Wear</title>
+<meta name="description" content="Privacy policy for Footy Scores for Wear. The app collects nothing. This page is specific about the few things that do leave the watch.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+/* ------------------------------------------------------------------------------
+   Palette: docs/store/BRAND.md. A football ground after dark.
+   Night is the ground, Chalk is boundary paint, Leather is the ball, Siren is live.
+   Leather deep, Slate and Posts ghost fail AA and are NEVER allowed to carry words.
+   ------------------------------------------------------------------------------ */
+:root {
+  --night:        #0B0B0D;
+  --coal:         #17171A;
+  --coal-light:   #222226;
+  --leather:      #D7813A;
+  --leather-deep: #8E4A18;
+  --chalk:        #F4F1E9;
+  --siren:        #FF5A5A;
+  --ash:          #9A9AA0;
+  --stone:        #8A8A92;
+  --posts-ghost:  #26262A;
+
+  /* Bahnschrift if the reader's machine has it, otherwise the nearest condensed
+     grotesque already installed. The font file is deliberately NOT shipped as a
+     webfont: Microsoft permits rasterising Bahnschrift into images but not
+     redistributing the file, and a @font-face src is redistribution. */
+  --display: "Bahnschrift SemiBold Condensed", "Bahnschrift", "DIN Condensed",
+             "Roboto Condensed", "Liberation Sans Narrow", "DejaVu Sans Condensed",
+             "Arial Narrow", system-ui, sans-serif;
+  --body:    "Bahnschrift Light", "Bahnschrift", "Roboto", "Liberation Sans",
+             "DejaVu Sans", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--chalk);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  /* Flat fills only. No gradient, no glow, no mesh. */
+}
+
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+/* ---- Masthead -------------------------------------------------------------
+   Break the grid: the posts sit hard left and the title runs against them,
+   rather than a centred stack of mark, title and body. -------------------- */
+header.mast {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.25rem;
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--posts-ghost);
+}
+header.mast svg { flex: none; display: block; }
+.mast-text { min-width: 0; }
+
+.kicker {
+  font-family: var(--display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: var(--leather);
+  margin: 0 0 0.35rem;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  margin: 0;
+  color: var(--chalk);
+}
+.updated {
+  color: var(--stone);
+  font-size: 0.85rem;
+  margin: 1.25rem 0 0;
+}
+
+h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  color: var(--chalk);
+  margin: 3rem 0 0.35rem;
+  padding-top: 0.35rem;
+}
+h2 + p, h2 + ul, h2 + table, h2 + .card { margin-top: 0.75rem; }
+
+h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--ash);
+  margin: 2rem 0 0.5rem;
+}
+
+p { margin: 0 0 1.05rem; }
+strong { color: var(--chalk); font-weight: 600; }
+a { color: var(--leather); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover, a:focus-visible { color: var(--chalk); }
+
+ul { margin: 0 0 1.05rem; padding-left: 1.15rem; }
+li { margin-bottom: 0.55rem; }
+li::marker { color: var(--leather-deep); }
+
+/* ---- The lead card --------------------------------------------------------- */
+.card {
+  background: var(--coal);
+  border-left: 3px solid var(--leather);
+  padding: 1.35rem 1.5rem 0.4rem;
+  margin: 2rem 0;
+}
+.card.quiet { border-left-color: var(--posts-ghost); background: var(--coal); }
+.card p:last-child { margin-bottom: 1rem; }
+
+/* ---- Table ----------------------------------------------------------------- */
+.scroll { overflow-x: auto; margin: 0 0 1.25rem; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 32rem;
+  font-size: 0.95rem;
+}
+caption { caption-side: top; text-align: left; color: var(--stone); font-size: 0.85rem; padding-bottom: 0.5rem; }
+th, td {
+  text-align: left;
+  padding: 0.7rem 0.9rem 0.7rem 0;
+  border-bottom: 1px solid var(--posts-ghost);
+  vertical-align: top;
+}
+thead th {
+  font-family: var(--display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 0.7rem;
+  color: var(--ash);
+  border-bottom-color: var(--leather-deep);
+}
+tbody th { font-weight: 600; color: var(--chalk); white-space: nowrap; padding-right: 1.25rem; }
+tbody td { color: var(--ash); }
+td code, th code {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.85em;
+  color: var(--chalk);
+  background: var(--coal-light);
+  padding: 0.1em 0.4em;
+}
+
+/* ---- Cannot-do list -------------------------------------------------------- */
+.cannot {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.4rem;
+}
+.cannot li {
+  margin: 0;
+  background: var(--coal);
+  color: var(--ash);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  border-bottom: 2px solid var(--posts-ghost);
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--posts-ghost);
+  color: var(--stone);
+  font-size: 0.9rem;
+}
+footer .email { font-family: var(--display); font-size: 1.05rem; }
+
+@media (max-width: 34rem) {
+  body { font-size: 16px; }
+  header.mast { gap: 1rem; padding-top: 2.5rem; }
+  header.mast svg { width: 44px; height: auto; }
+}
+
+/* This page commits to the night palette in both schemes. It is the same product
+   as the watch, which is dark whatever the phone is set to. Backgrounds and
+   colours are painted explicitly so no host theme shows through. */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <!-- Four posts: two tall goal posts flanked by two short behind posts, evenly
+         spaced. The mark that says Australian rules and nothing else. BRAND.md. -->
+    <svg width="58" height="74" viewBox="0 0 58 74" aria-hidden="true" focusable="false">
+      <g fill="#26262A">
+        <rect x="2"  y="26" width="4" height="48"/>
+        <rect x="17" y="0"  width="5" height="74"/>
+        <rect x="36" y="0"  width="5" height="74"/>
+        <rect x="52" y="26" width="4" height="48"/>
+      </g>
+    </svg>
+    <div class="mast-text">
+      <p class="kicker">Footy Scores for Wear</p>
+      <h1>Privacy Policy</h1>
+    </div>
+  </header>
+
+  <p class="updated">Last updated 11 August 2026 &middot; Jonathon Denholm, Melbourne, Australia</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">The short version</h2>
+    <p>The app does not collect anything about you. There is no account, no sign-in, no
+    analytics, no advertising, no crash reporting and no tracking of any kind. Nothing you do
+    in the app is sent to me, and I have no way to identify you or your watch.</p>
+    <p>This page is not short because it says nothing. It is short because there is nothing to
+    say, and the rest of it is spent being specific about the few things that <em>do</em> leave
+    the watch, rather than padding a page that could have been three lines.</p>
+  </div>
+
+  <h2>What the app stores</h2>
+  <p>Three things, on the watch, in the app's own private storage:</p>
+  <ul>
+    <li><strong>The club you picked</strong>, as a short abbreviation such as <code>COLL</code>.</li>
+    <li><strong>The dates you opened the app during the free trial</strong>, as a list of plain
+    dates. This is how the fourteen-day trial is counted. It records the date only — not a
+    time, not what you looked at.</li>
+    <li><strong>Whether you have unlocked the app</strong>, as a yes or no.</li>
+  </ul>
+  <p>The app also keeps a <strong>cache of the score data it last downloaded</strong>, so it can
+  show you something when the watch is out of signal. That is a copy of the same public
+  football data anybody can fetch, and it holds nothing about you.</p>
+  <p>All of it is removed when you uninstall the app. There is no server-side copy, because
+  there is no server.</p>
+
+  <div class="card quiet">
+    <p><strong>One qualification, which is Android's doing rather than mine.</strong> The app
+    allows Android's own backup system to run. If you have Android backup enabled for your
+    device, Google may copy this app's stored settings into the backup held against your Google
+    account, in the same way it does for other apps. That backup belongs to you and is governed
+    by Google's privacy policy, not this one. I have no access to it.</p>
+  </div>
+
+  <h2>What leaves the watch</h2>
+  <p>To show scores, the app makes requests to four places, all over HTTPS.</p>
+
+  <div class="scroll">
+  <table>
+    <caption>Every outbound request the app makes.</caption>
+    <thead>
+      <tr><th scope="col">Who</th><th scope="col">What for</th><th scope="col">What they receive</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">ESPN<br><code>site.api.espn.com</code></th>
+        <td>Live scores, match detail, goals, the ladder</td>
+        <td>Your watch's IP address, the time, and the address of the score page requested</td>
+      </tr>
+      <tr>
+        <th scope="row">Squiggle<br><code>api.squiggle.com.au</code></th>
+        <td>Fixtures and the ladder, as a fallback when ESPN is unavailable</td>
+        <td>The same, plus a header identifying the app (see below)</td>
+      </tr>
+      <tr>
+        <th scope="row">AFL<br><code>aflapi.afl.com.au</code></th>
+        <td>Fixtures, scores and the ladder, as a further source when ESPN is unavailable</td>
+        <td>Your watch's IP address, the time, and the address of the page requested</td>
+      </tr>
+      <tr>
+        <th scope="row">GitHub Pages<br><code>footyscore.app</code></th>
+        <td>A small settings file, which lets me change how often the app refreshes, or switch a
+        broken data source off, without shipping an update</td>
+        <td>Your watch's IP address and the time</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Yes, this means ESPN, Squiggle and the AFL see your IP address.</strong> Any request
+  to any website does; it is how a reply finds its way back to you. I am naming it because a
+  privacy policy that says "we collect nothing" while the app quietly talks to three large third
+  parties is not telling you the truth. Those requests carry no name, no account, no device
+  identifier and no advertising ID — only the ordinary metadata of an HTTP request. What ESPN,
+  Squiggle and the AFL do with their own server logs is governed by their policies, not mine.</p>
+
+  <p>The request to Squiggle carries a header identifying the app:
+  <code>Footy Scores for Wear - jonathon.denholm@gmail.com</code>. That is <strong>my</strong>
+  email address, not yours. It is there because Squiggle's terms of use ask every caller to
+  identify itself and leave a contact. It tells Squiggle which app is calling. It tells them
+  nothing about who is wearing the watch.</p>
+
+  <p>The request to <code>footyscore.app</code> fetches a fixed settings file. It sends
+  nothing about you, and the file it downloads is the same for every user. It happens at most
+  about four times an hour. That file is served by <strong>GitHub Pages</strong>, which means
+  GitHub — not me — receives the request, and GitHub's handling of it is covered by
+  <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement">GitHub's
+  privacy statement</a>. The domain is mine; the machine is not. Nothing about it being my own
+  address changes who is on the other end, and no request goes to any computer of mine.</p>
+
+  <p><strong>No request from this app ever goes to a server that reports back to me about
+  you.</strong> I do not run the score APIs and I do not see their logs. I do not run any server
+  at all: the settings file sits on GitHub Pages, and I am not given its access logs.</p>
+
+  <h2>Purchases</h2>
+  <p>The app is a one-off purchase made through <strong>Google Play Billing</strong>. Google
+  handles the entire transaction. Your payment details are entered into Google's systems and
+  never touch this app or reach me — I never see a card number, a billing address or a name.</p>
+  <p>Google gives me the sales and payout reporting every Play developer gets in the Play
+  Console. Google's handling of your purchase is covered by
+  <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</p>
+  <p>Inside the app, the result of a purchase is stored as the single yes-or-no flag described
+  above.</p>
+
+  <h2>What the app cannot do</h2>
+  <p>Worth stating plainly, because these are the things people reasonably worry about on a
+  device worn against the skin. The app asks for exactly three permissions that reach anything:
+  internet access, the ability to check whether the watch is online, and Google Play billing.
+  It therefore has no ability to read any of the following.</p>
+  <ul class="cannot">
+    <li>Location</li>
+    <li>Heart rate</li>
+    <li>Steps and workouts</li>
+    <li>Any health or fitness data</li>
+    <li>Contacts</li>
+    <li>Calendar</li>
+    <li>Messages</li>
+    <li>Notifications</li>
+    <li>Call history</li>
+    <li>Photos and files</li>
+    <li>Microphone</li>
+    <li>Camera</li>
+  </ul>
+  <p>It has no access to anything else on the watch, or to your phone.</p>
+  <p style="color:var(--stone);font-size:0.9rem">A fourth entry appears in the app's technical
+  manifest, <code>DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code>. It is added automatically by
+  Android's own support libraries, it is a permission the app defines <em>for itself</em> so that
+  other apps cannot reach one of its internal components, and it grants access to nothing.</p>
+
+  <h2>Children</h2>
+  <p>The app is not directed at children and collects nothing from anyone, of any age.</p>
+
+  <h2>Your data rights</h2>
+  <p>There is no personal data held about you to access, correct, export or delete, because none
+  is collected. Deleting what the app has stored is done by uninstalling it.</p>
+  <p>If you believe otherwise, or want to ask about any of this, write to me and I will answer.</p>
+
+  <h2>What this policy does not claim</h2>
+  <p>I would rather be accurate than reassuring, so, plainly:</p>
+  <ul>
+    <li>I do <strong>not</strong> claim to control what ESPN, Squiggle, the AFL, GitHub or Google
+    do with the requests and transactions they receive. I have named them so you can read their
+    policies.</li>
+    <li>I do <strong>not</strong> claim any special security measure beyond the ordinary.
+    Requests use HTTPS, and the app's stored settings sit in the private per-app storage Android
+    gives every app. There is no additional encryption scheme, because there is no sensitive
+    data to protect.</li>
+    <li>I am <strong>not</strong> affiliated with, endorsed by, or connected to the Australian
+    Football League, ESPN or Squiggle. Score data is third-party, unofficial, and can be late or
+    wrong.</li>
+  </ul>
+
+  <h2>Changes</h2>
+  <p>If this ever changes — if the app gains a feature that collects something, or a data source
+  changes — I will update this page and change the date at the top. The app collecting nothing
+  is a design decision, not an accident, and I do not expect it to change.</p>
+
+  <footer>
+    <p class="email"><a href="mailto:jonathon.denholm@gmail.com">jonathon.denholm@gmail.com</a></p>
+    <p>Jonathon Denholm &middot; Melbourne, Victoria, Australia</p>
+  </footer>
+
+</div>
+</body>
+</html>

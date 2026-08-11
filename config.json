@@ -1,0 +1,7 @@
+{
+  "config": "footyscores",
+  "espn": "on",
+  "livePollSeconds": 30,
+  "idlePollMinutes": 60,
+  "notice": null
+}

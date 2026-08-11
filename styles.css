@@ -1,0 +1,251 @@
+/* Footy Scores — matchday.
+ *
+ * THE SITE IS THE APP'S OWN PALETTE, not a theme invented for the web: true black ground, bone
+ * text, one live red. Those values are lifted from FootyPalette.kt so the page and the watch
+ * cannot drift into different reds. The club colours are the accent system, exactly as they are
+ * in the product — nothing here introduces a colour the app does not already use.
+ *
+ * It shares its two typefaces with watchwalks.com and nothing else. The sibling relationship is
+ * the fonts; the rest — black instead of paper, a scoreboard instead of terrain, hard rules
+ * instead of contour lines — is this app.
+ */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/fraunces-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hanken';
+  src: url('fonts/hanken-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  /* Straight from the app. */
+  --black: #000000;
+  --card: #141416;
+  --card-live: #1F1F23;
+  --line: #2A2A2E;
+  --ink: #EDEDED;
+  --dim: #9A9AA0;
+  --faint: #6E6E75;
+  --live: #FF5A5A;
+  --bone: #F2EAD9;
+
+  --measure: 66ch;
+  --wrap: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--ink);
+  font-family: Hanken, ui-sans-serif, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  /* A very slight warmth off pure black at the top, so the page has a horizon rather than being
+     a void. It never lightens enough to stop being the app's black. */
+  background-image: radial-gradient(120% 60% at 50% -10%, #17171B 0%, #000 62%);
+  background-repeat: no-repeat;
+}
+
+.wrap { width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--ink); color: var(--black); padding: 10px 16px; border-radius: 8px;
+}
+.skip:focus { left: 20px; top: 14px; z-index: 20; }
+
+a { color: var(--ink); text-decoration-color: var(--faint); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--live); }
+
+/* ---------------------------------------------------------------- header */
+
+header { border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: baseline; gap: 26px; padding: 18px 0; }
+.brand {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700; font-size: 20px; letter-spacing: -0.01em;
+  text-decoration: none; color: var(--ink);
+}
+.brand .dot { color: var(--live); }
+.spacer { flex: 1; }
+.navlink { font-size: 15px; color: var(--dim); text-decoration: none; }
+.navlink:hover { color: var(--ink); }
+@media (max-width: 640px) { .navlink { display: none; } }
+
+/* ---------------------------------------------------------------- type */
+
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(38px, 6.2vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+}
+h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(26px, 3.4vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+h3 {
+  font-family: Hanken, sans-serif;
+  font-weight: 600; font-size: 17px; letter-spacing: 0.01em;
+  margin: 0 0 6px;
+}
+p { margin: 0 0 16px; max-width: var(--measure); }
+.lead { font-size: clamp(18px, 2vw, 21px); color: var(--ink); }
+.kicker {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600; font-size: 14px; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--live); margin: 0 0 14px;
+}
+.sub { color: var(--dim); }
+small, .small { font-size: 14px; color: var(--dim); }
+
+/* ---------------------------------------------------------------- hero */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+  padding: 72px 0 64px;
+}
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 40px; }
+}
+
+.btn {
+  display: inline-block;
+  background: var(--ink); color: var(--black);
+  font-weight: 600; font-size: 16px;
+  padding: 13px 22px; border-radius: 999px;
+  text-decoration: none;
+}
+.btn:hover { background: #fff; }
+.btn-ghost {
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--line); margin-left: 10px;
+}
+.btn-ghost:hover { background: var(--card); border-color: var(--dim); }
+.cta { margin: 26px 0 12px; }
+
+/* ------------------------------------------------- the scoreboard itself */
+
+/* THE HERO IS A SCOREBOARD, drawn the way the watch draws one: two club colour bars, the score
+   as goals, behinds and total, and a status line carrying the quarter and the clock. It is built
+   from real markup rather than shipped as a picture so it stays sharp, reads to a screen reader
+   as a table of scores, and cannot go stale against a redesign of the app.
+   The numbers are the captured Round 22 fixture the app's own tests are held to. */
+.board {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.6);
+}
+.board.is-live { background: var(--card-live); }
+
+.board-row {
+  display: grid;
+  grid-template-columns: 6px 1fr auto;
+  align-items: center;
+  gap: 0 16px;
+  padding: 18px 20px;
+}
+.board-row + .board-row { border-top: 1px solid var(--line); }
+.swatch { align-self: stretch; border-radius: 3px; background: var(--club, var(--dim)); }
+.club { font-weight: 600; font-size: 19px; letter-spacing: 0.01em; }
+.club .name { display: block; font-size: 13px; color: var(--faint); font-weight: 400; letter-spacing: 0.02em; }
+.score { text-align: right; font-family: Fraunces, Georgia, serif; }
+.score .total { font-weight: 700; font-size: 34px; letter-spacing: -0.02em; display: block; line-height: 1; }
+.score .breakdown { font-size: 13px; color: var(--dim); font-family: Hanken, sans-serif; }
+
+.board-status {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+  background: #0B0B0D;
+  font-size: 14px; color: var(--dim);
+}
+.pulse {
+  width: 8px; height: 8px; border-radius: 999px; background: var(--live);
+  box-shadow: 0 0 0 0 rgba(255,90,90,.6);
+  animation: pulse 2.2s ease-out infinite;
+}
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 9px rgba(255,90,90,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,90,90,0); }
+}
+/* Anyone who has asked their system not to animate gets a plain dot. */
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+.tag-live { color: var(--live); font-weight: 600; letter-spacing: 0.04em; }
+
+/* --dim rather than --faint: at 13px on black, faint measures about 4.2:1 and this line carries a
+   real idea rather than being a caption. Looked at on screen, not calculated and assumed. */
+.board-note { margin-top: 12px; font-size: 13px; color: var(--dim); max-width: 46ch; }
+
+/* ---------------------------------------------------------------- sections */
+
+section.band { padding: 64px 0; border-top: 1px solid var(--line); }
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 34px 40px;
+  margin-top: 34px;
+}
+/* Deliberately NOT a row of identical cards: these are plain columns with a hairline above each,
+   which is the app's own divider rather than a shadowed rectangle. */
+.col { border-top: 2px solid var(--line); padding-top: 16px; }
+.col h3 { margin-bottom: 4px; }
+.col p { margin: 0; color: var(--dim); font-size: 16px; }
+
+.split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+}
+@media (max-width: 820px) { .split { grid-template-columns: 1fr; gap: 28px; } }
+
+/* The alerts grid, drawn as the settings screen states it: three kinds, three reaches. */
+.grid-alerts { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 15px; }
+.grid-alerts caption { text-align: left; color: var(--faint); font-size: 13px; padding-bottom: 10px; }
+.grid-alerts th, .grid-alerts td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: left; }
+.grid-alerts th { color: var(--faint); font-weight: 500; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+.grid-alerts td:first-child { font-weight: 600; }
+.pick { color: var(--live); font-weight: 600; }
+
+.price {
+  font-family: Fraunces, Georgia, serif; font-weight: 700;
+  font-size: clamp(40px, 5vw, 60px); line-height: 1; letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+
+.notlist { list-style: none; padding: 0; margin: 18px 0 0; max-width: var(--measure); }
+.notlist li { padding: 10px 0 10px 26px; border-bottom: 1px solid var(--line); position: relative; color: var(--dim); }
+.notlist li::before {
+  content: ""; position: absolute; left: 4px; top: 20px;
+  width: 10px; height: 1px; background: var(--faint);
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 40px 0 60px;
+  color: var(--faint); font-size: 14px;
+}
+footer a { color: var(--dim); }
+.foot-links { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 18px; }
+.disclaimer { max-width: 78ch; }
