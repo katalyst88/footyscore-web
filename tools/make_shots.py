@@ -111,6 +111,18 @@ def main() -> int:
     for s, d in wear.items():
         round_watch(WEAR_SRC / s, OUT / d)
 
+    # ⚠️ THE REAL FANTASY SCREEN, not a stand-in. The fantasy captures were taken for a layout
+    # audit rather than for the store, so they sit in a different folder and are easy to miss. The
+    # first cut of the fantasy section on the site was illustrated with the GOAL FEED under alt
+    # text describing fantasy scorers, which is the same caption/image mismatch already caught once
+    # on the ladder. An image that contradicts its own caption is worse than no image.
+    fan_src = pathlib.Path(r"C:\Users\jwden\FootyWear\docs\screenshots\fantasy_192")
+    if (fan_src / "fantasy_top.png").exists():
+        print("Fantasy (round, masked):")
+        round_watch(fan_src / "fantasy_top.png", OUT / "w-fantasy.png")
+    else:
+        print("  MISSING the fantasy capture")
+
     apple_src = pathlib.Path(
         r"C:\Users\jwden\AppData\Local\Temp\claude\C--Users-jwden--local-bin"
         r"\d9e0b64f-f287-4fc3-a418-472e979aec47\scratchpad\apple")
