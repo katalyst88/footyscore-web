@@ -98,7 +98,6 @@ def main() -> int:
     wear = {
         "wear-01-scoreboard.png": "w-round.png",
         "wear-02-match-detail.png": "w-match.png",
-        "wear-03-alerts-grid.png": "w-alerts.png",
         "wear-05-spoiler-mode.png": "w-spoilers.png",
         "wear-06-finals.png": "w-finals.png",
         "wear-07-tile.png": "w-tile.png",
@@ -115,10 +114,17 @@ def main() -> int:
     apple_src = pathlib.Path(
         r"C:\Users\jwden\AppData\Local\Temp\claude\C--Users-jwden--local-bin"
         r"\d9e0b64f-f287-4fc3-a418-472e979aec47\scratchpad\apple")
+    # Only the frames the page actually uses. Generating the rest just leaves dead weight in the
+    # repo that looks like it is on the site and is not.
+    APPLE_USED = {"a2_scoreboard": "a-scoreboard.png", "a3_ladder": "a-ladder.png"}
     if apple_src.exists():
         print("Apple (rounded rectangle):")
-        for f in sorted(apple_src.glob("*.png")):
-            apple_watch(f, OUT / f"a-{f.stem.split('_')[-1]}.png")
+        for stem, out in APPLE_USED.items():
+            src = apple_src / f"{stem}.png"
+            if src.exists():
+                apple_watch(src, OUT / out)
+            else:
+                print(f"  MISSING {src.name}")
     else:
         print(f"no Apple captures at {apple_src} yet")
     return 0
