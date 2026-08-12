@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Footy Scores — the whole match, on your wrist</title>
-<meta name="description" content="Live goals and behinds, the quarter, the clock, and who kicked the last one. A standalone Wear OS app for Australian rules football, men's and women's. No phone app, no account, no advertising.">
+<meta name="description" content="Live goals and behinds, the quarter, the clock, and who kicked the last one. A standalone watch app for Australian rules football, men's and women's, on Apple Watch and Wear OS. No phone app, no account, no advertising.">
 <link rel="canonical" href="https://footyscore.app/">
 <meta name="theme-color" content="#000000">
 <!-- The app's own launcher icon, not a mark drawn for the web. One icon, both places. -->
@@ -15,19 +15,22 @@
 <meta property="og:url" content="https://footyscore.app/">
 <meta property="og:title" content="Footy Scores — the whole match, on your wrist">
 <meta property="og:description" content="Collingwood 12.9 (81), West Coast 10.6 (66), Q3 11:49. That is a whole match, and it fits on a watch.">
+<meta property="og:image" content="https://footyscore.app/img/w-round.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Footy Scores">
-<meta name="twitter:description" content="Live goals and behinds, the quarter, the clock, and who kicked the last one. On Wear OS.">
+<meta name="twitter:description" content="Live goals and behinds, the quarter, the clock, and who kicked the last one. Apple Watch and Wear OS.">
+<meta name="twitter:image" content="https://footyscore.app/img/w-round.png">
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Footy Scores for Wear",
- "operatingSystem":"Wear OS",
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Footy Scores",
+ "operatingSystem":"watchOS, Wear OS",
  "applicationCategory":"SportsApplication",
- "offers":{"@type":"Offer","price":"10.00","priceCurrency":"AUD"},
+ "offers":[{"@type":"Offer","price":"10.00","priceCurrency":"AUD","category":"Wear OS"},
+           {"@type":"Offer","price":"9.99","priceCurrency":"AUD","category":"Apple Watch"}],
  "url":"https://footyscore.app"}
 </script>
 
-<link rel="stylesheet" href="styles.css?v=20260811">
+<link rel="stylesheet" href="styles.css?v=20260812">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -38,6 +41,7 @@
     <span class="spacer"></span>
     <a class="navlink" href="#watch">On the watch</a>
     <a class="navlink" href="#alerts">Alerts</a>
+    <a class="navlink" href="#later">Watching later</a>
     <a class="navlink" href="#cost">What it costs</a>
     <a class="navlink" href="privacy.html">Privacy</a>
   </div>
@@ -45,21 +49,24 @@
 
 <main id="main" tabindex="-1">
 
-  <!-- THE HERO IS A SCOREBOARD, and it is real markup rather than a screenshot: it stays sharp at
-       any size, it reads to a screen reader as scores rather than as an image, and it cannot go
-       stale against a redesign of the app. The figures are the captured Round 22 fixture the app's
-       own tests are held to, so the page and the test suite agree on what a match looks like. -->
+  <!-- ================================================================= hero
+       THE HERO LEADS WITH THE MOMENT, NOT THE FEATURE LIST. What somebody wants at 2:35 on a
+       Saturday is the score without getting their phone out; everything the app does is downstream
+       of that. The scoreboard beside it is real markup rather than an image so it stays sharp at
+       any size, reads to a screen reader as scores rather than as a picture, and cannot go stale
+       against a redesign. Its figures are the captured Round 22 fixture the app's own tests are
+       held to, so the page and the test suite agree on what a match looks like. -->
   <div class="wrap">
     <section class="hero">
       <div>
-        <p class="kicker">Australian rules, on your wrist</p>
-        <h1>The whole match, in the space of a watch face.</h1>
-        <p class="lead">Goals and behinds, the total, the quarter and the clock — and who kicked the last one. It runs on the watch by itself: no phone app to install, nothing to pair, no account to make.</p>
+        <p class="kicker">Apple Watch &middot; Wear OS</p>
+        <h1>Look at your wrist. That's the whole score.</h1>
+        <p class="lead">Goals and behinds, the total, the quarter and the clock &mdash; and who kicked the last one. It runs on the watch by itself: no phone app to install, nothing to pair, no account to make.</p>
         <div class="cta">
           <a class="btn" href="#cost">What it costs</a>
-          <a class="btn btn-ghost" href="#watch">See what it does</a>
+          <a class="btn btn-ghost" href="#watch">See every screen</a>
         </div>
-        <p class="small">Wear OS. Men's and women's. Free for fourteen days of football.</p>
+        <p class="small">Men's and women's. Free for fourteen days of football &mdash; days football is actually played.</p>
       </div>
 
       <div>
@@ -87,47 +94,87 @@
     </section>
   </div>
 
-  <!-- ------------------------------------------------------------ on the watch -->
+  <!-- ================================================================= the three things
+       ⚠️ ASYMMETRIC ON PURPOSE. Three equal cards in a row is the single most recognisable
+       generated layout; the first item here is deliberately the large one, and the images are real
+       captures rather than drawn mockups. -->
   <section class="band" id="watch">
     <div class="wrap">
-      <h2>What is on it</h2>
-      <p class="sub">Six screens, and none of them is a list of everything at once.</p>
+      <p class="kicker">What you actually get</p>
+      <h2>Three things, and the round is the big one.</h2>
 
-      <div class="cols">
-        <div class="col">
-          <h3>The round</h3>
-          <p>Every match as a card: both clubs, the goals and behinds, the total, and a line carrying the quarter and the clock. Matches in play sort to the top.</p>
+      <div class="feature feature-lead">
+        <figure class="shot shot-round">
+          <img src="img/w-round.png" width="300" height="300" loading="lazy" decoding="async"
+               alt="A round watch showing Round 22: Carlton 106, St Kilda 62 at full time, and Collingwood 117, West Coast 98 below it.">
+        </figure>
+        <div>
+          <h3>The round, sorted the way you'd sort it</h3>
+          <p>Every match as a card &mdash; both clubs, goals and behinds, the total, and a line carrying the quarter and the clock. <strong>Matches in play sort to the top</strong>, so the game that is actually happening is the one under your thumb. Finished matches keep their final score; matches that haven't started show when they will.</p>
+          <p class="small">Your club is drawn in its own colours, and its match sits above the rest of the round.</p>
         </div>
-        <div class="col">
-          <h3>One match</h3>
-          <p>The headline score, the breakdown, the score by quarter with the current quarter marked, and the leading goalkicker for each side.</p>
+      </div>
+
+      <div class="feature feature-flip">
+        <figure class="shot shot-round">
+          <img src="img/w-match.png" width="300" height="300" loading="lazy" decoding="async"
+               alt="One match at Marvel Stadium: Carlton 106 from 16.10, St Kilda 62 from 8.14, with the score by quarter beneath.">
+        </figure>
+        <div>
+          <h3>One match, in full</h3>
+          <p>The headline score with the breakdown underneath, the score quarter by quarter with the current quarter marked, and the leading goalkicker for each side. The margin is worked out for you, because nobody wants to subtract at the pub.</p>
         </div>
-        <div class="col">
-          <h3>Goal by goal</h3>
-          <p>Every score in reverse order — who kicked it, which quarter, the time on the clock, and the score after it went through.</p>
-        </div>
-        <div class="col">
-          <h3>The ladder</h3>
-          <p>Position, club, record and premiership points, sorted on points and then percentage, with the finals cut drawn as a real line.</p>
-        </div>
-        <div class="col">
-          <h3>The finals bracket</h3>
-          <p>Worked out from the ladder rather than fetched. Who plays who — and where the rule does not settle a spot yet, it says so instead of guessing.</p>
-        </div>
-        <div class="col">
-          <h3>A tile and complications</h3>
-          <p>One swipe from the watch face: your club as the hero with three more matches beside it. Or the score on the face you already wear.</p>
+      </div>
+
+      <div class="feature">
+        <figure class="shot shot-round">
+          <img src="img/w-goals.png" width="300" height="300" loading="lazy" decoding="async"
+               alt="The goal feed: M. Hall for St Kilda in the last quarter making it 106 to 62, then T. Byrne for Carlton.">
+        </figure>
+        <div>
+          <h3>Every goal, newest first</h3>
+          <p>Who kicked it, which quarter, the time on the clock, and the score after it went through. Open it ten minutes late and you can read exactly what you missed, in the order it happened.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ------------------------------------------------------------ alerts -->
+  <!-- ================================================================= more screens -->
+  <section class="band band-tight">
+    <div class="wrap">
+      <h2>And the rest of it</h2>
+      <p class="sub">Six screens, and none of them is a list of everything at once.</p>
+
+      <div class="gallery">
+        <figure>
+          <img src="img/w-finals.png" width="230" height="230" loading="lazy" decoding="async"
+               alt="The finals bracket showing Collingwood 81 leading West Coast 66 by 15 points, live in the third quarter.">
+          <figcaption><strong>The finals bracket.</strong> Worked out from the ladder rather than fetched &mdash; and where the rule doesn't settle a spot yet, it says so instead of guessing.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/w-tile.png" width="230" height="230" loading="lazy" decoding="async"
+               alt="The tile: Collingwood 81, West Coast 66 live in the third quarter, with three more matches beneath.">
+          <figcaption><strong>A tile, one swipe from the face.</strong> Your club as the hero with three more matches beside it. No app to open at all.</figcaption>
+        </figure>
+        <!-- ⚠️ THIS ONE IS THE APPLE CAPTURE, DELIBERATELY. There is no Wear ladder screenshot, and
+             the first cut of this page put the ALERTS grid here under a caption about the ladder —
+             a caption describing a screen that was not in the picture. Two round frames and one
+             square is also the honest shape of the product: it is two apps. -->
+        <figure>
+          <img src="img/a-ladder.png" width="200" height="234" loading="lazy" decoding="async"
+               alt="The ladder on Apple Watch: Fremantle first on 72 points, Sydney second on 64, Hawthorn third on 58, with percentages beside them.">
+          <figcaption><strong>The ladder.</strong> Position, club, record and premiership points, sorted on points and then percentage, with the finals cut drawn as a real line. Shown here on Apple Watch.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= alerts -->
   <section class="band" id="alerts">
     <div class="wrap split">
       <div>
         <p class="kicker">Alerts</p>
-        <h2>Three settings, not one switch.</h2>
+        <h2>Know it happened without looking.</h2>
         <p>Everything is off until you turn it on. Then goals, quarter breaks and the final siren are three separate settings, and each one is off, your club, or every match.</p>
         <p>So you can take every goal in the round and still only hear about your own club at quarter time. One buzz fifteen minutes before your club plays, with no score in it. And one game can be muted on its own without touching any of it.</p>
       </div>
@@ -138,44 +185,70 @@
             <tr><th scope="col">Buzz me for</th><th scope="col">Off</th><th scope="col">My club</th><th scope="col">Every match</th></tr>
           </thead>
           <tbody>
-            <tr><td>Goals</td><td>—</td><td>—</td><td class="pick">chosen</td></tr>
-            <tr><td>Quarter breaks</td><td>—</td><td class="pick">chosen</td><td>—</td></tr>
-            <tr><td>The final siren</td><td>—</td><td class="pick">chosen</td><td>—</td></tr>
+            <tr><td>Goals</td><td>&mdash;</td><td>&mdash;</td><td class="pick">chosen</td></tr>
+            <tr><td>Quarter breaks</td><td>&mdash;</td><td class="pick">chosen</td><td>&mdash;</td></tr>
+            <tr><td>The final siren</td><td>&mdash;</td><td class="pick">chosen</td><td>&mdash;</td></tr>
           </tbody>
         </table>
         <p class="small" style="margin-top:14px">While your club is playing the score is checked at most once a minute. Between matches nothing is checked at all, and off the charger below 20 per cent it slows down further.</p>
+        <p class="small note-apple"><strong>Apple Watch:</strong> alerts are Wear OS only for now. watchOS gives an app roughly one background wake an hour, so a goal alert would arrive fifteen to thirty minutes late &mdash; which is worse than no alert. Everything else on this page is on both.</p>
       </div>
     </div>
   </section>
 
-  <!-- ------------------------------------------------------------ spoilers -->
-  <section class="band">
-    <div class="wrap split">
+  <!-- ================================================================= spoilers -->
+  <section class="band" id="later">
+    <div class="wrap split split-flip">
       <div>
         <p class="kicker">Watching it later</p>
         <h2>Nothing gives it away.</h2>
-        <p>Hide every score — on the tile, on the watch face and in the app — until you open a match yourself. The goals and behinds go with it, because 12.9 is 81 to anyone who follows football.</p>
-        <p>The alerts switch off at the same time, since every one of them is the result arriving early.</p>
+        <p>Hide every score &mdash; on the tile, on the watch face and in the app &mdash; until you open a match yourself. The goals and behinds go with it, because 12.9 is 81 to anyone who follows football.</p>
+        <p>The alerts switch off at the same time, since every one of them is the result arriving early. Turn it back on after the replay and the round is as it was.</p>
       </div>
-      <div>
-        <div class="board">
-          <div class="board-row" style="--club:#2A2A2E">
-            <span class="swatch" aria-hidden="true"></span>
-            <span class="club">GEEL<span class="name">Geelong</span></span>
-            <span class="score"><span class="total">—</span><span class="breakdown">hidden</span></span>
+      <figure class="shot shot-round">
+        <img src="img/w-spoilers.png" width="300" height="300" loading="lazy" decoding="async"
+             alt="The round with every score hidden: dashes where the numbers would be, and the note that a match is final.">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================================================================= both watches -->
+  <section class="band band-tight" id="both">
+    <div class="wrap">
+      <p class="kicker">Two watches</p>
+      <h2>Built twice, on purpose.</h2>
+      <p class="sub sub-wide">Not one app wrapped for both. The scoring, the ladder maths and the finals rules are the same tested logic; each watch gets the interface its own platform reads as native.</p>
+
+      <div class="platforms">
+        <div class="platform">
+          <figure class="shot shot-apple">
+            <img src="img/a-scoreboard.png" width="238" height="278" loading="lazy" decoding="async"
+                 alt="Footy Scores on Apple Watch, showing Round 22 with Carlton 106 and St Kilda 62.">
+          </figure>
+          <div>
+            <h3>Apple Watch</h3>
+            <p class="platform-price">$9.99, once</p>
+            <p>watchOS 10 or later. Runs on the watch alone &mdash; there is no iPhone app, because there is nothing for one to do.</p>
+            <p class="small">Alerts are not on this one yet. See above for why.</p>
           </div>
-          <div class="board-row" style="--club:#2A2A2E">
-            <span class="swatch" aria-hidden="true"></span>
-            <span class="club">ESS<span class="name">Essendon</span></span>
-            <span class="score"><span class="total">—</span><span class="breakdown">hidden</span></span>
+        </div>
+        <div class="platform">
+          <figure class="shot shot-round shot-sm">
+            <img src="img/w-club.png" width="238" height="238" loading="lazy" decoding="async"
+                 alt="Footy Scores on Wear OS in club colours, showing Collingwood against West Coast.">
+          </figure>
+          <div>
+            <h3>Wear OS</h3>
+            <p class="platform-price">$10, once</p>
+            <p>Wear OS 3 or later. Tile, complications and the full alert set.</p>
+            <p class="small">Standalone: it installs to the watch, not through a phone.</p>
           </div>
-          <div class="board-status"><span>Final &middot; tap to reveal</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ------------------------------------------------------------ cost -->
+  <!-- ================================================================= cost -->
   <section class="band" id="cost">
     <div class="wrap split">
       <div>
@@ -183,13 +256,14 @@
         <p class="price">$10, once</p>
         <p>Free to download, and everything works for fourteen days. After that one payment keeps it for good. No subscription. No advertising.</p>
         <p><strong>The fourteen days are days football is actually played</strong>, not days on the calendar. Install it in December and the fourteen days are still waiting for you in March.</p>
+        <p class="small">$9.99 on Apple Watch &mdash; Apple has no $10 price point. The two are separate purchases on separate stores.</p>
       </div>
       <div>
         <h3 style="margin-bottom:10px">What it does not do</h3>
         <ul class="notlist">
           <li>No account, and nothing to sign in to.</li>
           <li>No advertising, and no third-party analytics.</li>
-          <li>No club logos — they are trademarks, and eighteen of them would be eighteen network fetches on a watch.</li>
+          <li>No club logos &mdash; they are trademarks, and eighteen of them would be eighteen network fetches on a watch.</li>
           <li>No phone app required, and nothing to pair.</li>
           <li>Scores come from third-party sources. They are unofficial, and they can be late or wrong.</li>
         </ul>
