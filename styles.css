@@ -400,3 +400,14 @@ footer a { color: var(--dim); }
 @media (max-width: 640px) {
   .steps li { grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
 }
+
+/* The honest status line on the tester page. It exists so the page can say what works TODAY
+   rather than describing the finished state and sending people to a dead end. */
+.status {
+  margin-top: 18px; padding: 14px 16px;
+  border-left: 2px solid var(--live);
+  background: var(--card);
+  border-radius: 0 10px 10px 0;
+  color: var(--dim); font-size: 0.95rem; line-height: 1.55;
+}
+.status strong { color: var(--ink); }
