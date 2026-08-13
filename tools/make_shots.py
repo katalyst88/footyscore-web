@@ -103,6 +103,10 @@ def main() -> int:
         "wear-07-tile.png": "w-tile.png",
         "wear-08-goal-feed.png": "w-goals.png",
         "wear-04-club-theme.png": "w-club.png",
+        # THE SECOND COMPETITION, WITH ITS OWN HEADING. Added 13 Aug with the sectioned board.
+        # The page claimed "AFL and AFLW in the one app" and illustrated it with nothing, which
+        # is the one line on the page a reader is most likely to want proof of.
+        "wear-09-aflw-section.png": "w-aflw.png",
     }
     missing = [s for s in wear if not (WEAR_SRC / s).exists()]
     if missing:
