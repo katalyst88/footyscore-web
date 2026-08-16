@@ -17,7 +17,20 @@ import pathlib
 from PIL import Image, ImageDraw
 
 OUT = pathlib.Path(__file__).resolve().parent.parent / "img"
+
+# The Play store set, recaptured from the watch each release.
 WEAR_SRC = pathlib.Path(r"C:\Users\jwden\FootyWear\docs\store\wear")
+
+# ⚠️ THE SITE SHOWS SCREENS THE STORE SET DOES NOT, AND THIS IS WHERE THEY LIVE. Play takes at
+# most EIGHT screenshots and the page illustrates nine things, so three of the site's images have
+# never been in the store set - and on 16 Aug, when the store set was recaptured and renamed, this
+# script broke: it was still asking for wear-05-spoiler-mode, wear-06-finals and wear-04-club-theme
+# by their old names and would have reported every source missing.
+#
+# A second folder rather than a longer store set, because the two are chosen for different reasons:
+# the store set is the eight that sell the app, this is whatever the page happens to show. Keeping
+# them apart means recapturing one cannot silently empty the other.
+WEAR_SITE_SRC = pathlib.Path(r"C:\Users\jwden\FootyWear\docs\store\wear-site")
 
 # The app's own palette, so the frames belong to the product rather than to a stock kit.
 INK = (10, 10, 11)
@@ -95,43 +108,54 @@ def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
 
     print("Wear (round, masked):")
+    # (source folder, source file) -> the name the page asks for.
+    #
+    # ⚠️ THE FILENAMES ON THE LEFT ARE THE STORE SET'S AND THE STORE SET GETS RENUMBERED. It was
+    # renumbered on 16 Aug when the whole set was recaptured from the watch, which is what turned
+    # this dictionary into eight missing sources. If this script reports one, look at what is in
+    # docs/store/wear before assuming a capture failed.
     wear = {
-        "wear-01-scoreboard.png": "w-round.png",
-        "wear-02-match-detail.png": "w-match.png",
-        "wear-05-spoiler-mode.png": "w-spoilers.png",
-        "wear-06-finals.png": "w-finals.png",
-        "wear-07-tile.png": "w-tile.png",
-        "wear-08-goal-feed.png": "w-goals.png",
-        "wear-04-club-theme.png": "w-club.png",
+        (WEAR_SRC, "wear-01-scoreboard.png"): "w-round.png",
+        (WEAR_SRC, "wear-02-match-detail.png"): "w-match.png",
+        (WEAR_SRC, "wear-03-goal-feed.png"): "w-goals.png",
+        (WEAR_SRC, "wear-07-tile.png"): "w-tile.png",
+        # THE LADDER GALLERY SLOT USED TO BE THE APPLE CAPTURE, and on 16 Aug its caption stopped
+        # being true of it: the Wear table gained column headings and a percentage column, the
+        # caption was updated to say so, and the picture beside it showed neither. Same
+        # caption/image mismatch as the fantasy section, so the same answer - show the screen the
+        # words are about. Apple still has the whole "Two watches" section to itself.
+        (WEAR_SRC, "wear-05-ladder.png"): "w-ladder.png",
         # THE SECOND COMPETITION, WITH ITS OWN HEADING. Added 13 Aug with the sectioned board.
         # The page claimed "AFL and AFLW in the one app" and illustrated it with nothing, which
         # is the one line on the page a reader is most likely to want proof of.
-        "wear-09-aflw-section.png": "w-aflw.png",
+        (WEAR_SRC, "wear-06-aflw.png"): "w-aflw.png",
+        # ⚠️ THE REAL FANTASY SCREEN, not a stand-in. This used to come from a layout-audit folder
+        # rather than the store set, and the first cut of the fantasy section on the site was
+        # illustrated with the GOAL FEED under alt text describing fantasy scorers - the same
+        # caption/image mismatch already caught once on the ladder. It is now a store capture, so
+        # the picture on the page and the picture on Play are the same screen.
+        (WEAR_SRC, "wear-08-top-scorers.png"): "w-fantasy.png",
+        # The three the store set has no room for. See WEAR_SITE_SRC.
+        (WEAR_SITE_SRC, "wear-05-spoiler-mode.png"): "w-spoilers.png",
+        (WEAR_SITE_SRC, "wear-06-finals.png"): "w-finals.png",
+        (WEAR_SITE_SRC, "wear-04-club-theme.png"): "w-club.png",
     }
-    missing = [s for s in wear if not (WEAR_SRC / s).exists()]
+    missing = [f"{d.name}/{s}" for (d, s) in wear if not (d / s).exists()]
     if missing:
         print(f"  MISSING SOURCES: {missing}")
         return 1
-    for s, d in wear.items():
-        round_watch(WEAR_SRC / s, OUT / d)
-
-    # ⚠️ THE REAL FANTASY SCREEN, not a stand-in. The fantasy captures were taken for a layout
-    # audit rather than for the store, so they sit in a different folder and are easy to miss. The
-    # first cut of the fantasy section on the site was illustrated with the GOAL FEED under alt
-    # text describing fantasy scorers, which is the same caption/image mismatch already caught once
-    # on the ladder. An image that contradicts its own caption is worse than no image.
-    fan_src = pathlib.Path(r"C:\Users\jwden\FootyWear\docs\screenshots\fantasy_192")
-    if (fan_src / "fantasy_top.png").exists():
-        print("Fantasy (round, masked):")
-        round_watch(fan_src / "fantasy_top.png", OUT / "w-fantasy.png")
-    else:
-        print("  MISSING the fantasy capture")
+    for (folder, s), d in wear.items():
+        round_watch(folder / s, OUT / d)
 
     apple_src = pathlib.Path(
         r"C:\Users\jwden\AppData\Local\Temp\claude\C--Users-jwden--local-bin"
         r"\d9e0b64f-f287-4fc3-a418-472e979aec47\scratchpad\apple")
     # Only the frames the page actually uses. Generating the rest just leaves dead weight in the
     # repo that looks like it is on the site and is not.
+    #
+    # a-ladder went out of use on 16 Aug when the gallery slot moved to the Wear table - it is
+    # kept here because the Apple ladder is one edit away from being wanted again and the
+    # capture folder is a temp path that will not survive being needed later.
     APPLE_USED = {"a2_scoreboard": "a-scoreboard.png", "a3_ladder": "a-ladder.png"}
     if apple_src.exists():
         print("Apple (rounded rectangle):")
