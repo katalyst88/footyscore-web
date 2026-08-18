@@ -6,6 +6,8 @@
 <title>Privacy Policy: Footy Scores</title>
 <meta name="description" content="Privacy policy for Footy Scores for Wear and Footy Scores for Watch. Neither app collects anything. This page is specific about the few things that do leave the watch.">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0B0D">
+<meta name="color-scheme" content="dark">
 <style>
 /* ------------------------------------------------------------------------------
    Palette: docs/store/BRAND.md. A football ground after dark.
@@ -13,6 +15,10 @@
    Leather deep, Slate and Posts ghost fail AA and are NEVER allowed to carry words.
    ------------------------------------------------------------------------------ */
 :root {
+  /* Declared so the browser knows the darkening is already done — without it Chrome's Auto Dark
+     Theme on Android runs its own filter over a page that is already dark. See styles.css. */
+  color-scheme: dark;
+
   --night:        #0B0B0D;
   --coal:         #17171A;
   --coal-light:   #222226;

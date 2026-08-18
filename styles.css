@@ -24,6 +24,14 @@
 }
 
 :root {
+  /* ⚠️ THIS SITE IS ALREADY DARK, AND WITHOUT THIS LINE THE BROWSER DOES NOT KNOW THAT.
+   * A page that declares no colour scheme is assumed to be a light one, so Chrome's Auto Dark
+   * Theme on Android treats true black as something to "fix" and runs its own filter over the
+   * design — measured 2026-08-17, it flips the tester button from a bone pill with dark text to
+   * a dark pill with light text. Declaring the scheme tells every engine the darkening is
+   * already done, and it also colours form controls and the scrollbar to match. */
+  color-scheme: dark;
+
   /* Straight from the app. */
   --black: #000000;
   --card: #141416;
