@@ -231,7 +231,7 @@ footer .email { font-family: var(--display); font-size: 1.05rem; }
     </div>
   </header>
 
-  <p class="updated">Last updated 11 August 2026 &middot; Jonathon Denholm, Melbourne, Australia</p>
+  <p class="updated">Last updated 22 August 2026 &middot; Jonathon Denholm, Melbourne, Australia</p>
 
   <div class="card">
     <h2 style="margin-top:0">The short version</h2>
@@ -267,7 +267,7 @@ footer .email { font-family: var(--display); font-size: 1.05rem; }
   </div>
 
   <h2>What leaves the watch</h2>
-  <p>To show scores, the app makes requests to four places, all over HTTPS.</p>
+  <p>To show scores, the app makes requests to five places, all over HTTPS.</p>
 
   <div class="scroll">
   <table>
@@ -289,6 +289,13 @@ footer .email { font-family: var(--display); font-size: 1.05rem; }
       <tr>
         <th scope="row">AFL<br><code>aflapi.afl.com.au</code></th>
         <td>Fixtures, scores and the ladder, as a further source when ESPN is unavailable</td>
+        <td>Your watch's IP address, the time, and the address of the page requested</td>
+      </tr>
+      <tr>
+        <th scope="row">AFL<br><code>api.afl.com.au</code></th>
+        <td>Live scores for women's matches, which the address above does not carry until the
+        final siren. The app first asks this host for a short-lived access token, then uses it to
+        read the round being watched</td>
         <td>Your watch's IP address, the time, and the address of the page requested</td>
       </tr>
       <tr>
@@ -347,9 +354,12 @@ footer .email { font-family: var(--display); font-size: 1.05rem; }
   <h2>What the app cannot do</h2>
   <p>Worth stating plainly, because these are the things people reasonably worry about on a
   device worn against the skin.</p>
-  <p>On Wear OS the app asks for exactly three permissions that reach anything: internet access,
-  the ability to check whether the watch is online, and Google Play billing. On Apple Watch it
-  asks for none at all beyond making network requests and buying the unlock.</p>
+  <p>On Wear OS the app declares five permissions: internet access; the ability to read which
+  network the watch is on, and to ask the platform for the watch's own wi-fi when the phone has
+  walked out of range; Google Play billing; and permission to post a notification, which is how a
+  goal alert reaches your wrist. That last one is asked for at the moment you switch alerts on,
+  and it lets the app <em>send</em> you a notification. It does not let it read yours. On Apple
+  Watch the app asks for none at all beyond making network requests and buying the unlock.</p>
   <p>It therefore has no ability to read any of the following.</p>
   <ul class="cannot">
     <li>Location</li>
@@ -359,14 +369,14 @@ footer .email { font-family: var(--display); font-size: 1.05rem; }
     <li>Contacts</li>
     <li>Calendar</li>
     <li>Messages</li>
-    <li>Notifications</li>
+    <li>Notifications sent to you by anything else</li>
     <li>Call history</li>
     <li>Photos and files</li>
     <li>Microphone</li>
     <li>Camera</li>
   </ul>
   <p>It has no access to anything else on the watch, or to your phone.</p>
-  <p style="color:var(--stone);font-size:0.9rem">On Wear OS a fourth entry appears in the app's technical
+  <p style="color:var(--stone);font-size:0.9rem">On Wear OS a sixth entry appears in the app's technical
   manifest, <code>DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code>. It is added automatically by
   Android's own support libraries, it is a permission the app defines <em>for itself</em> so that
   other apps cannot reach one of its internal components, and it grants access to nothing.</p>
